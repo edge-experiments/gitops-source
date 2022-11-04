@@ -36,7 +36,7 @@ spec:
         - --v=2
         - --kubelet-https=true
         - --kubelet-port=10250
-        image: turbonomic/kubeturbo:8.6.2
+        image: libai98/kubeturbo:8.7.1-SNAPSHOT
         imagePullPolicy: IfNotPresent
         name: kubeturbo
         resources: {}
