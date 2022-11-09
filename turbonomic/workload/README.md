@@ -1,11 +1,11 @@
 ### Overview
 This example is similar to the [blue-green deployment](/kcp/nginx/README.md).
 The major difference is that, this example uses one single namespace and one single Placement.
-In this example, nginx can be rescheduled from one edge cluster (i.e. kcp pcluster) to another,
+In this example, workload can be rescheduled from one edge cluster (i.e. kcp pcluster) to another,
 by changing the `optimized` Placement and commit the change to git.
 
 For example, one can change from `aisle: "2"` to `aisle: "1"`,
-so that nginx is scheduled from some cluster located in aisle 2 to some cluster located in aisle 1.
+so that workload is scheduled from some cluster located in aisle 2 to some cluster located in aisle 1.
 
 ### Before using GitOps tools
 Cleanup default scheduling:
@@ -29,7 +29,7 @@ With Argo CD:
 ```console
 argocd app create scheduling-optimized \
 --repo https://github.com/edge-experiments/gitops-source.git \
---path turbonomic/nginx/scheduling/ \
+--path turbonomic/scheduling/ \
 --dest-server https://172.31.31.125:6443/clusters/root:my-org:edge \
 --sync-policy automated
 ```
@@ -37,12 +37,13 @@ argocd app create scheduling-optimized \
 ```console
 argocd app create deploy-optimized \
 --repo https://github.com/edge-experiments/gitops-source.git \
---path turbonomic/nginx/deploy/ \
+--path turbonomic/workload/cpumemload/ \
 --dest-server https://172.31.31.125:6443/clusters/root:my-org:edge \
 --sync-policy automated
 ```
 
 ### Check the delivered workloads
+The speicific workload here is nginx.
 ```console
 $ docker exec -it cluster1-control-plane bash
 root@cluster1-control-plane:/# kubectl get svc,deploy,po -l app=nginx -A
