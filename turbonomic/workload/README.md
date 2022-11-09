@@ -1,5 +1,6 @@
 ### Overview
-This example is similar to the [blue-green deployment](/kcp/nginx/README.md).
+This example uses nginx as workload.
+It is similar to the [blue-green deployment](/kcp/nginx/README.md).
 The major difference is that, this example uses one single namespace and one single Placement.
 In this example, workload can be rescheduled from one edge cluster (i.e. kcp pcluster) to another,
 by changing the `optimized` Placement and commit the change to git.
@@ -43,7 +44,6 @@ argocd app create deploy-optimized \
 ```
 
 ### Check the delivered workloads
-The speicific workload here is nginx.
 ```console
 $ docker exec -it cluster1-control-plane bash
 root@cluster1-control-plane:/# kubectl get svc,deploy,po -l app=nginx -A
