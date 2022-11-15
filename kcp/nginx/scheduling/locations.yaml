@@ -4,6 +4,7 @@ kind: Location
 metadata:
   name: green
   labels:
+    name: green
     color: green
 spec:
   instanceSelector:
@@ -19,6 +20,7 @@ kind: Location
 metadata:
   name: blue
   labels:
+    name: blue
     color: blue
 spec:
   instanceSelector:
