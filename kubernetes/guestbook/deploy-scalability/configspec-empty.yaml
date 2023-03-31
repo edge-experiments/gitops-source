@@ -3,5 +3,6 @@ kind: ConfigSpec
 metadata:
   # edit the name here
   name: guestbook
+  label: 1
 spec:
   content: []
