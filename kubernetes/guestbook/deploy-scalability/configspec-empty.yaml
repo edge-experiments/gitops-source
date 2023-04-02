@@ -4,6 +4,6 @@ metadata:
   # edit the name here
   name: guestbook
   labels: 
-    new: l1
+    new: l2
 spec:
   content: []
