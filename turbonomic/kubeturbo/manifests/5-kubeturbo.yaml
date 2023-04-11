@@ -36,7 +36,8 @@ spec:
         - --v=2
         - --kubelet-https=true
         - --kubelet-port=10250
-        image: libai98/kubeturbo:8.7.1-SNAPSHOT
+        - --cluster-key-injected=edge-demo
+        image: icr.io/cpopen/kubeturbo:8.8.4
         imagePullPolicy: IfNotPresent
         name: kubeturbo
         resources: {}
