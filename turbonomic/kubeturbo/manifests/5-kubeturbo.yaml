@@ -37,7 +37,7 @@ spec:
         - --kubelet-https=true
         - --kubelet-port=10250
         - --cluster-key-injected=edge-demo
-        image: icr.io/cpopen/kubeturbo:8.8.4
+        image: icr.io/cpopen/turbonomic/kubeturbo:8.8.4
         imagePullPolicy: IfNotPresent
         name: kubeturbo
         resources: {}
