@@ -39,17 +39,17 @@ $ ../kcp.sh syncer -w my-org -c cluster1 -r services
 Cleanup default scheduling:
 ```console
 $ kubectl delete placement default
-placement.scheduling.kcp.dev "default" deleted
+placement.scheduling.kcp.io "default" deleted
 $ kubectl delete location default
-location.scheduling.kcp.dev "default" deleted
+location.scheduling.kcp.io "default" deleted
 ```
 
 Label the SyncTargets:
 ```console
 $ kubectl label synctarget cluster1 color=green
-synctarget.workload.kcp.dev/cluster1 labeled
+synctarget.workload.kcp.io/cluster1 labeled
 $ kubectl label synctarget cluster2 color=blue
-synctarget.workload.kcp.dev/cluster2 labeled
+synctarget.workload.kcp.io/cluster2 labeled
 ```
 
 ### Use GitOps tools
