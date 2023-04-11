@@ -9,7 +9,7 @@ spec:
     version: v1alpha1
   locationSelectors:
   - matchLabels:
-      aisle: "1"
+      aisle: "2"
   locationWorkspace: root:my-org:edge
   namespaceSelector:
     matchLabels:
