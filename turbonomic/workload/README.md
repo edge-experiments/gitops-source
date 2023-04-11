@@ -11,18 +11,16 @@ so that workload is scheduled from some cluster located in aisle 2 to some clust
 ### Before using GitOps tools
 Cleanup default scheduling:
 ```console
-$ kubectl delete placement default
-placement.scheduling.kcp.dev "default" deleted
 $ kubectl delete location default
-location.scheduling.kcp.dev "default" deleted
+location.scheduling.kcp.io "default" deleted
 ```
 
 Label the SyncTargets:
 ```console
 $ kubectl label synctarget cluster1 aisle="1"
-synctarget.workload.kcp.dev/cluster1 labeled
+synctarget.workload.kcp.io/cluster1 labeled
 $ kubectl label synctarget cluster2 aisle="2"
-synctarget.workload.kcp.dev/cluster2 labeled
+synctarget.workload.kcp.io/cluster2 labeled
 ```
 
 ### Use GitOps tools

@@ -1,5 +1,5 @@
 ---
-apiVersion: scheduling.kcp.dev/v1alpha1
+apiVersion: scheduling.kcp.io/v1alpha1
 kind: Location
 metadata:
   name: green
@@ -11,11 +11,11 @@ spec:
     matchLabels:
       color: green # Synctarget label to match
   resource:
-    group: workload.kcp.dev
+    group: workload.kcp.io
     resource: synctargets
     version: v1alpha1
 ---
-apiVersion: scheduling.kcp.dev/v1alpha1
+apiVersion: scheduling.kcp.io/v1alpha1
 kind: Location
 metadata:
   name: blue
@@ -27,6 +27,6 @@ spec:
     matchLabels:
       color: blue # Synctarget label to match
   resource:
-    group: workload.kcp.dev
+    group: workload.kcp.io
     resource: synctargets
     version: v1alpha1
