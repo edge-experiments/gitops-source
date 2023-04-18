@@ -1,0 +1,12 @@
+---
+apiVersion: edge.kcp.io/v1alpha1
+kind: EdgePlacement
+metadata:
+  name: optimized
+spec:
+  locationSelectors:
+  - matchLabels:
+      aisle: "1"
+  namespaceSelector:
+    matchLabels:
+      optimizer: turbonomic
