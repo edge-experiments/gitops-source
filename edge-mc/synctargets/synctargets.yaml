@@ -1,0 +1,16 @@
+---
+apiVersion: workload.kcp.io/v1alpha1
+kind: SyncTarget
+metadata:
+  name: cluster1
+  labels:
+    aisle: "1"
+spec: {}
+---
+apiVersion: workload.kcp.io/v1alpha1
+kind: SyncTarget
+metadata:
+  name: cluster2
+  labels:
+    aisle: "2"
+spec: {}
