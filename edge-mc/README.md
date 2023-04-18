@@ -19,7 +19,7 @@ $ argocd app create synctargets \
 application 'synctargets' created
 ```
 
-#### Create Argo CD Application against edge-mc's Workload Management Workspace (WMW)\
+#### Create Argo CD Application against edge-mc's Workload Management Workspace (WMW)
 Create an EdgePlacement. The command and output should be similar to
 ```console
 $ argocd app create edgeplacement \
