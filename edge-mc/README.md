@@ -29,3 +29,23 @@ $ argocd app create edgeplacement \
 --sync-policy automated
 application 'edgeplacement' created
 ```
+
+Create a Namespace. The command and output should be similar to
+```console
+$ argocd app create namespace \
+--repo https://github.com/edge-experiments/gitops-source.git \
+--path edge-mc/namespaces/ \
+--dest-server https://172.31.31.125:41973/clusters/root:my-org:wmw-1 \
+--sync-policy automated
+application 'namespace' created
+```
+
+Create a Deployment for 'cpumemload'. The command and output should be similar to
+```console
+$ argocd app create cpumemload \
+--repo https://github.com/edge-experiments/gitops-source.git \
+--path edge-mc/workloads/cpumemload/ \
+--dest-server https://172.31.31.125:41973/clusters/root:my-org:wmw-1 \
+--sync-policy automated
+application 'cpumemload' created
+```
