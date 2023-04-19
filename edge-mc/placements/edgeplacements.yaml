@@ -1,4 +1,3 @@
----
 apiVersion: edge.kcp.io/v1alpha1
 kind: EdgePlacement
 metadata:
