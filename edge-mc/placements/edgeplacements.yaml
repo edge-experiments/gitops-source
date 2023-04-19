@@ -10,3 +10,7 @@ spec:
   namespaceSelector:
     matchLabels:
       optimizer: turbonomic
+  nonNamespacedObjects:
+  - apiGroup: apis.kcp.io
+    resources: [ "apibindings" ]
+    resourceNames: [ "bind-kube" ]
