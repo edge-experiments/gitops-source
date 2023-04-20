@@ -4,7 +4,7 @@ Create two Locations. The command and output should be similar to
 $ argocd app create locations \
 --repo https://github.com/edge-experiments/gitops-source.git \
 --path edge-mc/locations/ \
---dest-server https://172.31.31.125:41973/clusters/root:imw-1 \
+--dest-server https://172.31.31.125:6443/clusters/root:imw-turbo \
 --sync-policy automated
 application 'locations' created
 ```
@@ -14,7 +14,7 @@ Create two SyncTargets. The command and output should be similar to
 $ argocd app create synctargets \
 --repo https://github.com/edge-experiments/gitops-source.git \
 --path edge-mc/synctargets/ \
---dest-server https://172.31.31.125:41973/clusters/root:imw-1 \
+--dest-server https://172.31.31.125:6443/clusters/root:imw-turbo \
 --sync-policy automated
 application 'synctargets' created
 ```
@@ -25,7 +25,7 @@ Create an EdgePlacement. The command and output should be similar to
 $ argocd app create edgeplacement \
 --repo https://github.com/edge-experiments/gitops-source.git \
 --path edge-mc/placements/ \
---dest-server https://172.31.31.125:41973/clusters/root:my-org:wmw-1 \
+--dest-server https://172.31.31.125:6443/clusters/root:my-org:wmw-turbo \
 --sync-policy automated
 application 'edgeplacement' created
 ```
@@ -35,7 +35,7 @@ Create a Namespace. The command and output should be similar to
 $ argocd app create namespace \
 --repo https://github.com/edge-experiments/gitops-source.git \
 --path edge-mc/namespaces/ \
---dest-server https://172.31.31.125:41973/clusters/root:my-org:wmw-1 \
+--dest-server https://172.31.31.125:6443/clusters/root:my-org:wmw-turbo \
 --sync-policy automated
 application 'namespace' created
 ```
@@ -45,7 +45,7 @@ Create a Deployment for 'cpumemload'. The command and output should be similar t
 $ argocd app create cpumemload \
 --repo https://github.com/edge-experiments/gitops-source.git \
 --path edge-mc/workloads/cpumemload/ \
---dest-server https://172.31.31.125:41973/clusters/root:my-org:wmw-1 \
+--dest-server https://172.31.31.125:6443/clusters/root:my-org:wmw-turbo \
 --sync-policy automated
 application 'cpumemload' created
 ```
