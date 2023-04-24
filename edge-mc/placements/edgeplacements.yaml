@@ -1,4 +1,3 @@
----
 apiVersion: edge.kcp.io/v1alpha1
 kind: EdgePlacement
 metadata:
@@ -6,11 +5,13 @@ metadata:
 spec:
   locationSelectors:
   - matchLabels:
-      aisle: "1"
+      aisle: "2"
   namespaceSelector:
     matchLabels:
       optimizer: turbonomic
   nonNamespacedObjects:
   - apiGroup: apis.kcp.io
-    resources: [ "apibindings" ]
-    resourceNames: [ "bind-kube" ]
+    resourceNames:
+    - bind-kube
+    resources:
+    - apibindings
