@@ -5,7 +5,7 @@ metadata:
 spec:
   locationSelectors:
   - matchLabels:
-      aisle: "1"
+      aisle: "2"
   namespaceSelector:
     matchLabels:
       optimizer: turbonomic
