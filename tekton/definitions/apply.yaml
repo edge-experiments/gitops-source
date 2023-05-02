@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: apply
+spec:
+  workspaces:
+  - name: wrapped
+  params:
+  - name: image
+    type: string
+    default: docker.io/bitnami/kubectl
+  - name: imagePullPolicy
+    type: string
+    default: IfNotPresent
+  steps:
+  - name: kubectl-version
+    image: $(params.image)
+    imagePullPolicy: $(params.imagePullPolicy)
+    script: kubectl version --client --short
+  - name: kubectl-apply
+    image: $(params.image)
+    script: |
+      echo "before applying:" && \
+      kubectl get configspec,devicegroup -A && \
+      echo "applying:" && \
+      kubectl apply -k $(workspaces.wrapped.path)/kubernetes/guestbook/deploy && \
+      echo "after applying:" && \
+      kubectl get configspec,devicegroup -A

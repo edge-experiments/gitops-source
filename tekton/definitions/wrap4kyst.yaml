@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: wrap4kyst
+spec:
+  workspaces:
+  - name: updates
+  params:
+  - name: image
+    type: string
+    default: docker.io/junatibm/wrap4kyst
+  - name: imagePullPolicy
+    type: string
+    default: Always
+  steps:
+  - name: ls
+    image: $(params.image)
+    imagePullPolicy: $(params.imagePullPolicy)
+    script: |
+      echo "content of the repository:" && \
+      ls $(workspaces.updates.path)
+  - name: wrap
+    image: $(params.image)
+    imagePullPolicy: $(params.imagePullPolicy)
+    script: |
+      /wrap4kyst \
+      -manifest-dir $(workspaces.updates.path)/kubernetes/guestbook/manifests/ \
+      -empty-configspec $(workspaces.updates.path)/kubernetes/guestbook/deploy/configspec-empty.yaml \
+      -configspec $(workspaces.updates.path)/kubernetes/guestbook/deploy/configspec.yaml
