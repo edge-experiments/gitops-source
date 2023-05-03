@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
   name: create-webhook-run
-  namespace: getting-started
+  namespace: default
 spec:
   taskRef:
     name: create-webhook
@@ -20,7 +20,7 @@ spec:
   - name: GitHubSecretStringKey
     value: secret
   - name: ExternalDomain
-    value: workloads.me:32612 # double check this
+    value: workloads.me:32612 # TODO(waltforme): double check this
 #   If you are using github enterprise, provide a value for GitHubDomain
 #  - name: GitHubDomain
 #    value: git.corp.com

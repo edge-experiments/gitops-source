@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
   name: create-ingress-run
-  namespace: getting-started
+  namespace: default
 spec:
   taskRef:
     name: create-ingress
@@ -14,7 +14,7 @@ spec:
   - name: CertificateSecretName
     value: ingresssecret
   - name: ExternalDomain
-    value: workloads.me # double check this
+    value: workloads.me # TODO(waltforme): double check this
   - name: Service
     value: el-getting-started-listener
   - name: ServicePort

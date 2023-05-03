@@ -1,11 +1,8 @@
-#### Setup triggers for the pipeline
-This part is a variant of Tekton triggers' [Getting Started](https://github.com/tektoncd/triggers/tree/main/docs/getting-started) tutorial.
-
 #### Manually run the pipeline
-In `tekton/pipelines/`, run
 ```shell
-kubectl apply -f definitions/ && \
-kubectl create -f runs/pipelinerun.yaml && \
+cd tekton/
+kubectl apply -f pipelines/definitions/ && \
+kubectl create -f pipelines/runs/ && \
 tkn pipelinerun logs ensure-latest-kyst-custom-resources-run -f
 ```
 
@@ -132,6 +129,56 @@ Remove the kyst custom resources:
 ```shell
 kubectl delete configspec guestbook
 kubectl delete devicegroup guestbook1
+```
+
+#### Setup triggers for the pipeline
+This part is a variant of Tekton triggers' [Getting Started](https://github.com/tektoncd/triggers/tree/main/docs/getting-started) tutorial.
+
+Setup RBAC.
+```shell
+kubectl apply -f triggers/definitions/rbac/admin-role.yaml -f ./definitions/rbac/clusterrolebinding.yaml
+kubectl apply -f triggers/definitions/rbac/webhook-role.yaml
+```
+
+Ensure the definitions of the pipeline.
+```shell
+kubectl apply -f pipelines/definitions/
+```
+
+Install the example Triggers resources.
+```shell
+kubectl apply -f triggers/definitions/triggers.yaml
+```
+
+Ensure the tasks for creating ingress and GitHub webhook.
+```shell
+kubectl apply -f triggers/definitions/create-ingress.yaml
+kubectl apply -f triggers/definitions/create-webhook.yaml
+```
+
+Create the ingress.
+```shell
+kubectl apply -f triggers/runs/create-ingress.yaml
+```
+
+Create a GitHub Personal Access Token with the following access privileges:
+- public_repo
+- admin:repo_hook
+
+Add the token to `triggers/secret.yaml`. Do NOT base64-encode the token.
+Create the secret.
+```shell
+kubectl apply -f triggers/secret.yaml
+```
+
+Create the GitHub webhook.
+```shell
+kubectl apply -f triggers/runs/create-webhook.yaml
+```
+
+Finally, start the entire chain of automation, including the triggers and the pipeline.
+```shell
+git commit -m "empty commit" --allow-empty && git push
 ```
 
 #### Resources for Tasks and Pipelines

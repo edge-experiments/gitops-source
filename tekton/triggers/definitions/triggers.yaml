@@ -2,7 +2,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
   name: getting-started-triggertemplate
-  namespace: getting-started
+  namespace: default
 spec:
   params:
     - name: gitrevision
@@ -13,36 +13,36 @@ spec:
     - name: namespace
       description: The namespace to create the resources
   resourcetemplates:
-    - apiVersion: tekton.dev/v1beta1
-      kind: PipelineRun
-      metadata:
-        generateName: getting-started-pipeline-run-
-        namespace: $(tt.params.namespace)
-      spec:
-        serviceAccountName: tekton-triggers-example-sa
-        pipelineRef:
-          name: getting-started-pipeline
-        resources:
-          - name: source-repo
-            resourceSpec:
-              type: git
-              params:
-              - name: revision
-                value: $(tt.params.gitrevision)
-              - name: url
-                value: $(tt.params.gitrepositoryurl)
-          - name: image-source
-            resourceSpec:
-              type: image
-              params:
-                - name: url
-                  value: DOCKERREPO-REPLACEME # docker-repo-location.com/repo:getting-started
-          - name: event-to-sink
-            resourceSpec:
-              type: cloudEvent
-              params:
-                - name: targetURI
-                  value: http://event-display.getting-started.svc.cluster.local
+    # - apiVersion: tekton.dev/v1beta1
+    #   kind: PipelineRun
+    #   metadata:
+    #     generateName: getting-started-pipeline-run-
+    #     namespace: $(tt.params.namespace)
+    #   spec:
+    #     serviceAccountName: tekton-triggers-example-sa
+    #     pipelineRef:
+    #       name: getting-started-pipeline
+    #     resources:
+    #       - name: source-repo
+    #         resourceSpec:
+    #           type: git
+    #           params:
+    #           - name: revision
+    #             value: $(tt.params.gitrevision)
+    #           - name: url
+    #             value: $(tt.params.gitrepositoryurl)
+    #       - name: image-source
+    #         resourceSpec:
+    #           type: image
+    #           params:
+    #             - name: url
+    #               value: DOCKERREPO-REPLACEME # docker-repo-location.com/repo:getting-started
+    #       - name: event-to-sink
+    #         resourceSpec:
+    #           type: cloudEvent
+    #           params:
+    #             - name: targetURI
+    #               value: http://event-display.getting-started.svc.cluster.local
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
@@ -74,13 +74,13 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   name: getting-started-pipelinebinding
-  namespace: getting-started
+  namespace: default
 spec:
   params:
     - name: gitrevision
       value: $(body.head_commit.id)
     - name: namespace
-      value: getting-started
+      value: default
     - name: gitrepositoryurl
       value: "https://github.com/$(body.repository.full_name)"
 ---
@@ -88,7 +88,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
   name: getting-started-listener
-  namespace: getting-started
+  namespace: default
 spec:
   serviceAccountName: tekton-triggers-example-sa
   triggers:
