@@ -134,6 +134,23 @@ kubectl delete devicegroup guestbook1
 #### Setup triggers for the pipeline
 This part is a variant of Tekton triggers' [Getting Started](https://github.com/tektoncd/triggers/tree/main/docs/getting-started) tutorial.
 
+This part assumes NGINX Ingress Controller for Kubernetes is inplace.
+```console
+$ kc -n ingress-nginx get all
+NAME                                            READY   STATUS    RESTARTS   AGE
+pod/ingress-nginx-controller-7844b9db77-q7m9j   1/1     Running   0          212d
+
+NAME                                         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+service/ingress-nginx-controller             LoadBalancer   10.99.171.186   <pending>     80:32619/TCP,443:32612/TCP   212d
+service/ingress-nginx-controller-admission   ClusterIP      10.99.74.224    <none>        443/TCP                      212d
+
+NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/ingress-nginx-controller   1/1     1            1           212d
+
+NAME                                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/ingress-nginx-controller-7844b9db77   1         1         1       212d
+```
+
 Setup RBAC.
 ```shell
 kubectl apply -f triggers/definitions/rbac/admin-role.yaml -f ./definitions/rbac/clusterrolebinding.yaml
