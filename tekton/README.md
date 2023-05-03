@@ -161,6 +161,11 @@ Create the ingress.
 kubectl apply -f triggers/runs/create-ingress.yaml
 ```
 
+Annotate the ingress, if the taskrun strangely doesn't include the annotation.
+```shell
+kubectl annotate ingress el-getting-started-listener kubernetes.io/ingress.class=nginx
+```
+
 Create a GitHub Personal Access Token with the following access privileges:
 - public_repo
 - admin:repo_hook
@@ -179,6 +184,17 @@ kubectl apply -f triggers/runs/create-webhook.yaml
 Finally, start the entire chain of automation, including the triggers and the pipeline.
 ```shell
 git commit -m "empty commit" --allow-empty && git push
+```
+
+Remove the pipelinerun:
+```shell
+kubectl delete pipelinerun ensure-latest-kyst-custom-resources-run
+```
+
+Remove the kyst custom resources:
+```shell
+kubectl delete configspec guestbook
+kubectl delete devicegroup guestbook1
 ```
 
 #### Resources for Tasks and Pipelines
