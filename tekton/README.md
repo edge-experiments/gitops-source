@@ -1,5 +1,8 @@
+#### Setup triggers for the pipeline
+This part is a variant of Tekton triggers' [Getting Started](https://github.com/tektoncd/triggers/tree/main/docs/getting-started) tutorial.
+
 #### Manually run the pipeline
-First, make sure Tekton's CLI `tkn` is installed. Then, in `tekton/pipelines/`, run
+In `tekton/pipelines/`, run
 ```shell
 kubectl apply -f definitions/ && \
 kubectl create -f runs/pipelinerun.yaml && \

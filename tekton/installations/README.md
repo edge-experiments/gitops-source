@@ -18,8 +18,6 @@ I just removed the `tekton-triggers` PodSecurityPolicy from the yaml.
 [Installation](https://storage.googleapis.com/tekton-releases/triggers/latest/interceptors.yaml) for interceptors works just fine.
 I saved a copy [here](./interceptors.yaml).
 
-Trying the [Getting Started](https://github.com/tektoncd/triggers/tree/main/docs/getting-started) tutorial.
-
 #### Installed Components
 After installations, the components look similar to
 ```console

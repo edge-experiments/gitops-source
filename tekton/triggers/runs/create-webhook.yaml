@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: create-webhook-run
+  namespace: getting-started
+spec:
+  taskRef:
+    name: create-webhook
+  params:
+  - name: GitHubOrg
+    value: "edge-experiments"
+  - name: GitHubUser
+    value: "waltforme"
+  - name: GitHubRepo
+    value: "gitops-source"
+  - name: GitHubSecretName
+    value: webhook-secret
+  - name: GitHubAccessTokenKey
+    value: token
+  - name: GitHubSecretStringKey
+    value: secret
+  - name: ExternalDomain
+    value: workloads.me:32612 # double check this
+#   If you are using github enterprise, provide a value for GitHubDomain
+#  - name: GitHubDomain
+#    value: git.corp.com
+  timeout: 1000s
+  serviceAccountName: tekton-triggers-createwebhook
