@@ -1,5 +1,5 @@
 #### Manually run the pipeline
-First, make sure Tekton's CLI `tkn` is installed. Then, in `tekton/`, run
+First, make sure Tekton's CLI `tkn` is installed. Then, in `tekton/pipelines/`, run
 ```shell
 kubectl apply -f definitions/ && \
 kubectl create -f runs/pipelinerun.yaml && \
