@@ -248,12 +248,3 @@ kubectl delete secret webhook-secret
 ```
 
 Remove the webhook from the GitHub repo.
-
-### Resources for Tasks and Pipelines
-There is a [catalog](https://github.com/tektoncd/catalog) of reuseable Tasks from Tekton. [This one](https://github.com/tektoncd/catalog/blob/main/task/git-clone/0.8/samples/git-clone-checking-out-a-branch.yaml) clones a branch then shows its README.md.
-
-There are quite a lot of Pipeline examples [here](https://github.com/tektoncd/pipeline/tree/main/examples/v1beta1).
-[One of it](https://github.com/tektoncd/pipeline/blob/main/examples/v1beta1/pipelineruns/workspace-from-volumeclaimtemplate.yaml) shows how to use a workspace to share data between tasks.
-
-### Resources for Triggers
-There are [examples](https://github.com/tektoncd/triggers/tree/main/examples) in Tekton Triggers GitHub [repository](https://github.com/tektoncd/triggers).
