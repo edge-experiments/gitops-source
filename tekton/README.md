@@ -5,9 +5,8 @@ In this example, pushing to GitHub triggers a PipelineRun, which in turn ensures
 The pipeline can be ran without the trigger.
 
 ```shell
-cd tekton/
-kubectl apply -f pipelines/definitions/ && \
-kubectl create -f pipelines/runs/ && \
+kubectl apply -f tekton/pipelines/definitions/ && \
+kubectl create -f tekton/pipelines/runs/pipelinerun.yaml && \
 tkn pipelinerun logs ensure-latest-kyst-custom-resources-run -f
 ```
 
@@ -125,7 +124,7 @@ pipelinerun.tekton.dev/ensure-latest-kyst-custom-resources-run created
 [apply-manifests : kubectl-apply] default     devicegroup.edge.kyst.kube/guestbook1           0s
 ```
 
-Remove the pipelinerun:
+Remove the pipelinerun, along with its taskruns:
 ```shell
 kubectl delete pipelinerun ensure-latest-kyst-custom-resources-run
 ```
@@ -158,31 +157,31 @@ NAME                                                  DESIRED   CURRENT   READY 
 replicaset.apps/ingress-nginx-controller-7844b9db77   1         1         1       212d
 ```
 
-Setup RBAC.
-```shell
-kubectl apply -f triggers/definitions/rbac/admin-role.yaml -f ./definitions/rbac/clusterrolebinding.yaml
-kubectl apply -f triggers/definitions/rbac/webhook-role.yaml
-```
-
 Ensure the definitions of the pipeline.
 ```shell
-kubectl apply -f pipelines/definitions/
+kubectl apply -f tekton/pipelines/definitions/
 ```
 
-Install the example Triggers resources.
+Setup RBAC of the trigger.
 ```shell
-kubectl apply -f triggers/definitions/triggers.yaml
+kubectl apply -f tekton/triggers/definitions/rbac/admin-role.yaml -f tekton/definitions/rbac/clusterrolebinding.yaml
+kubectl apply -f tekton/triggers/definitions/rbac/webhook-role.yaml
+```
+
+Install the definitions of the trigger.
+```shell
+kubectl apply -f tekton/triggers/definitions/triggers.yaml
 ```
 
 Ensure the tasks for creating ingress and GitHub webhook.
 ```shell
-kubectl apply -f triggers/definitions/create-ingress.yaml
-kubectl apply -f triggers/definitions/create-webhook.yaml
+kubectl apply -f tekton/triggers/definitions/create-ingress.yaml
+kubectl apply -f tekton/triggers/definitions/create-webhook.yaml
 ```
 
 Create the ingress.
 ```shell
-kubectl apply -f triggers/runs/create-ingress.yaml
+kubectl apply -f tekton/triggers/runs/create-ingress.yaml
 ```
 
 Create a GitHub Personal Access Token with the following access privileges:
@@ -192,12 +191,12 @@ Create a GitHub Personal Access Token with the following access privileges:
 Add the token to `triggers/secret.yaml`. Do NOT base64-encode the token.
 Create the secret.
 ```shell
-kubectl apply -f triggers/secret.yaml
+kubectl apply -f tekton/triggers/secret.yaml
 ```
 
 Create the GitHub webhook.
 ```shell
-kubectl apply -f triggers/runs/create-webhook.yaml
+kubectl apply -f tekton/triggers/runs/create-webhook.yaml
 ```
 
 Finally, start the entire chain of automation, including the triggers and the pipeline.
@@ -210,15 +209,42 @@ Check the log of the PipelineRun
 tkn pipelinerun logs ensure-latest-kyst-custom-resources-run -f
 ```
 
-Remove the kyst custom resources:
+### Clean up
+Remove the kyst custom resources.
 ```shell
 kubectl delete configspec guestbook
 kubectl delete devicegroup guestbook1
 ```
 
-Remove the pipelinerun:
+Remove the pipelinerun, along with its taskruns.
 ```shell
 kubectl delete pr ensure-latest-kyst-custom-resources-run
+```
+
+Remove the taskruns for creating ingress and GitHub webhook.
+```shell
+kubectl delete -f tekton/triggers/runs
+```
+
+Remove the definitions of the trigger.
+```shell
+kubectl delete -f tekton/triggers/definitions
+```
+
+Remove the RBAC of the trigger.
+```shell
+kubectl delete -f tekton/triggers/definitions/rbac
+```
+
+Remove definitions of the pipeline.
+```shell
+kubectl delete -f tekton/pipelines/definitions
+```
+
+Remove secrets.
+```shell
+kubectl delete secret ingresssecret
+kubectl delete secret webhook-secret
 ```
 
 ### Resources for Tasks and Pipelines
