@@ -11,6 +11,8 @@ spec:
   params:
   - name: ExternalDomain
     description: "The external domain for the EventListener e.g. `$(params.EventListenerName).<PROXYIP>.nip.io`"
+  - name: ExternalIP
+    description: "The external IP for the EventListener"
   - name: GitHubUser
     description: "The GitHub user"
   - name: GitHubRepo
@@ -43,7 +45,7 @@ spec:
       set -e
       echo "Create Webhook"
       if [ $(params.GitHubDomain) = "github.com" ];then
-        curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat /var/secret/$(params.GitHubSecretStringKey))\"}}" -X POST -u $(params.GitHubUser):$(cat /var/secret/$(params.GitHubAccessTokenKey)) -L https://api.github.com/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
+        curl -v -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalIP)\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat /var/secret/$(params.GitHubSecretStringKey))\"}}" -X POST -u $(params.GitHubUser):$(cat /var/secret/$(params.GitHubAccessTokenKey)) -L https://api.github.com/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
       else
-        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalDomain)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat /var/secret/$(params.GitHubSecretStringKey))\"}}" -X POST -u $(params.GitHubUser):$(cat /var/secret/$(params.GitHubAccessTokenKey)) -L https://$(params.GitHubDomain)/api/v3/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
+        curl -d "{\"name\": \"web\",\"active\": true,\"events\": $(params.WebhookEvents),\"config\": {\"url\": \"https://$(params.ExternalIP)/\",\"content_type\": \"json\",\"insecure_ssl\": \"1\" ,\"secret\": \"$(cat /var/secret/$(params.GitHubSecretStringKey))\"}}" -X POST -u $(params.GitHubUser):$(cat /var/secret/$(params.GitHubAccessTokenKey)) -L https://$(params.GitHubDomain)/api/v3/repos/$(params.GitHubOrg)/$(params.GitHubRepo)/hooks
       fi

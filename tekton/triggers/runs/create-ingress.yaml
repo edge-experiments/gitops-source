@@ -14,7 +14,9 @@ spec:
   - name: CertificateSecretName
     value: ingresssecret
   - name: ExternalDomain
-    value: workloads.me
+    value: mydomain
+  - name: ExternalIP
+    value: 44.209.242.207
   - name: Service
     value: el-getting-started-listener
   - name: ServicePort

@@ -20,7 +20,9 @@ spec:
   - name: GitHubSecretStringKey
     value: secret
   - name: ExternalDomain
-    value: workloads.me:32612
+    value: mydomain
+  - name: ExternalIP
+    value: 44.209.242.207:32612
 #   If you are using github enterprise, provide a value for GitHubDomain
 #  - name: GitHubDomain
 #    value: git.corp.com
