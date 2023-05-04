@@ -124,15 +124,15 @@ pipelinerun.tekton.dev/ensure-latest-kyst-custom-resources-run created
 [apply-manifests : kubectl-apply] default     devicegroup.edge.kyst.kube/guestbook1           0s
 ```
 
-Remove the pipelinerun, along with its taskruns:
-```shell
-kubectl delete pipelinerun ensure-latest-kyst-custom-resources-run
-```
-
 Remove the kyst custom resources:
 ```shell
 kubectl delete configspec guestbook
 kubectl delete devicegroup guestbook1
+```
+
+Remove the pipelinerun, along with its taskruns:
+```shell
+kubectl delete pipelinerun ensure-latest-kyst-custom-resources-run
 ```
 
 ### Setup triggers for the pipeline
@@ -164,7 +164,7 @@ kubectl apply -f tekton/pipelines/definitions/
 
 Setup RBAC of the trigger.
 ```shell
-kubectl apply -f tekton/triggers/definitions/rbac/admin-role.yaml -f tekton/definitions/rbac/clusterrolebinding.yaml
+kubectl apply -f tekton/triggers/definitions/rbac/admin-role.yaml -f tekton/triggers/definitions/rbac/clusterrolebinding.yaml
 kubectl apply -f tekton/triggers/definitions/rbac/webhook-role.yaml
 ```
 
@@ -236,7 +236,7 @@ Remove the RBAC of the trigger.
 kubectl delete -f tekton/triggers/definitions/rbac
 ```
 
-Remove definitions of the pipeline.
+Remove definitions, as well as the RBAC, of the pipeline.
 ```shell
 kubectl delete -f tekton/pipelines/definitions
 ```
@@ -246,6 +246,8 @@ Remove secrets.
 kubectl delete secret ingresssecret
 kubectl delete secret webhook-secret
 ```
+
+Remove the webhook from the GitHub repo.
 
 ### Resources for Tasks and Pipelines
 There is a [catalog](https://github.com/tektoncd/catalog) of reuseable Tasks from Tekton. [This one](https://github.com/tektoncd/catalog/blob/main/task/git-clone/0.8/samples/git-clone-checking-out-a-branch.yaml) clones a branch then shows its README.md.
