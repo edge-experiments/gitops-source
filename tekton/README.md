@@ -1,4 +1,9 @@
-#### Manually run the pipeline
+Here is an example of Tekton triggers and Tekton pipelines.
+In this example, pushing to GitHub triggers a PipelineRun, which in turn ensures some custom resources are up current.
+
+### Manually run the pipeline
+The pipeline can be ran without the trigger.
+
 ```shell
 cd tekton/
 kubectl apply -f pipelines/definitions/ && \
@@ -131,7 +136,9 @@ kubectl delete configspec guestbook
 kubectl delete devicegroup guestbook1
 ```
 
-#### Setup triggers for the pipeline
+### Setup triggers for the pipeline
+The pipeline can be triggered by a push to GitHub.
+
 This part is a variant of Tekton triggers' [Getting Started](https://github.com/tektoncd/triggers/tree/main/docs/getting-started) tutorial.
 
 This part assumes NGINX Ingress Controller for Kubernetes is inplace.
@@ -214,11 +221,11 @@ kubectl delete configspec guestbook
 kubectl delete devicegroup guestbook1
 ```
 
-#### Resources for Tasks and Pipelines
-There is a catalog of reuseable Tasks from Tekton. [This one](https://github.com/tektoncd/catalog/blob/main/task/git-clone/0.8/samples/git-clone-checking-out-a-branch.yaml) clones a branch then shows its README.md.
+### Resources for Tasks and Pipelines
+There is a [catalog](https://github.com/tektoncd/catalog) of reuseable Tasks from Tekton. [This one](https://github.com/tektoncd/catalog/blob/main/task/git-clone/0.8/samples/git-clone-checking-out-a-branch.yaml) clones a branch then shows its README.md.
 
 There are quite a lot of Pipeline examples [here](https://github.com/tektoncd/pipeline/tree/main/examples/v1beta1).
 [One of it](https://github.com/tektoncd/pipeline/blob/main/examples/v1beta1/pipelineruns/workspace-from-volumeclaimtemplate.yaml) shows how to use a workspace to share data between tasks.
 
-#### Resources for Triggers
+### Resources for Triggers
 There are [examples](https://github.com/tektoncd/triggers/tree/main/examples) in Tekton Triggers GitHub [repository](https://github.com/tektoncd/triggers).
