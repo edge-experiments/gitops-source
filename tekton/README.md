@@ -258,6 +258,8 @@ kubectl delete secret ingresssecret
 kubectl delete secret webhook-secret
 ```
 
+Remove the GitHub Personal Access Token, if necessary.
+
 Remove the definitions of the trigger.
 ```shell
 kubectl delete -f tekton/triggers/definitions
