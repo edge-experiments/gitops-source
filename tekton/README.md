@@ -173,7 +173,7 @@ Install the definitions of the trigger.
 kubectl apply -f tekton/triggers/definitions/triggers.yaml
 ```
 
-Ensure the tasks for creating ingress and GitHub webhook.
+Ensure the tasks for creating the ingress and the GitHub webhook.
 ```shell
 kubectl apply -f tekton/triggers/definitions/create-ingress.yaml
 kubectl apply -f tekton/triggers/definitions/create-webhook.yaml
@@ -204,7 +204,7 @@ Finally, start the entire chain of automation, including the triggers and the pi
 git commit -m "empty commit" --allow-empty && git push
 ```
 
-Check the log of the PipelineRun
+Check the log of the PipelineRun.
 ```shell
 tkn pipelinerun logs ensure-latest-kyst-custom-resources-run -f
 ```
@@ -221,9 +221,27 @@ Remove the pipelinerun, along with its taskruns.
 kubectl delete pr ensure-latest-kyst-custom-resources-run
 ```
 
-Remove the taskruns for creating ingress and GitHub webhook.
+Remove definitions, as well as the RBAC, of the pipeline.
+```shell
+kubectl delete -f tekton/pipelines/definitions
+```
+
+Remove th ingress.
+```shell
+kubectl delete ingress el-getting-started-listener
+```
+
+Remove the webhook from the GitHub repo.
+
+Remove the taskruns for creating the ingress and the GitHub webhook.
 ```shell
 kubectl delete -f tekton/triggers/runs
+```
+
+Remove secrets for the ingress and the GitHub webhook.
+```shell
+kubectl delete secret ingresssecret
+kubectl delete secret webhook-secret
 ```
 
 Remove the definitions of the trigger.
@@ -235,16 +253,3 @@ Remove the RBAC of the trigger.
 ```shell
 kubectl delete -f tekton/triggers/definitions/rbac
 ```
-
-Remove definitions, as well as the RBAC, of the pipeline.
-```shell
-kubectl delete -f tekton/pipelines/definitions
-```
-
-Remove secrets.
-```shell
-kubectl delete secret ingresssecret
-kubectl delete secret webhook-secret
-```
-
-Remove the webhook from the GitHub repo.
