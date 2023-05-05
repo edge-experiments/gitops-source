@@ -7,42 +7,12 @@ spec:
   params:
     - name: gitrevision
       description: The git revision
-      default: master
+      default: main
     - name: gitrepositoryurl
       description: The git repository url
     - name: namespace
       description: The namespace to create the resources
   resourcetemplates:
-    # - apiVersion: tekton.dev/v1beta1
-    #   kind: PipelineRun
-    #   metadata:
-    #     generateName: getting-started-pipeline-run-
-    #     namespace: $(tt.params.namespace)
-    #   spec:
-    #     serviceAccountName: tekton-triggers-example-sa
-    #     pipelineRef:
-    #       name: getting-started-pipeline
-    #     resources:
-    #       - name: source-repo
-    #         resourceSpec:
-    #           type: git
-    #           params:
-    #           - name: revision
-    #             value: $(tt.params.gitrevision)
-    #           - name: url
-    #             value: $(tt.params.gitrepositoryurl)
-    #       - name: image-source
-    #         resourceSpec:
-    #           type: image
-    #           params:
-    #             - name: url
-    #               value: DOCKERREPO-REPLACEME # docker-repo-location.com/repo:getting-started
-    #       - name: event-to-sink
-    #         resourceSpec:
-    #           type: cloudEvent
-    #           params:
-    #             - name: targetURI
-    #               value: http://event-display.getting-started.svc.cluster.local
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
@@ -66,9 +36,9 @@ spec:
                   storage: 1Gi
         params:
         - name: repo-url
-          value: https://github.com/edge-experiments/gitops-source.git
-        - name: branch-name
-          value: main
+          value: $(tt.params.gitrepositoryurl)
+        - name: revision
+          value: $(tt.params.gitrevision)
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding

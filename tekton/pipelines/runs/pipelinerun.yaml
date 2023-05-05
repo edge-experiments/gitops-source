@@ -21,5 +21,5 @@ spec:
   params:
   - name: repo-url
     value: https://github.com/edge-experiments/gitops-source.git
-  - name: branch-name
+  - name: revision
     value: main

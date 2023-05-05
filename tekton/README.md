@@ -26,13 +26,13 @@ tkn pipelinerun logs ensure-latest-kyst-custom-resources-run -f
 
 The output should be similar to
 ```console
-task.tekton.dev/apply configured
-task.tekton.dev/git-clone configured
-pipeline.tekton.dev/ensure-latest-kyst-custom-resources configured
-serviceaccount/tekton-kyst unchanged
-clusterrole.rbac.authorization.k8s.io/tekton-kyst unchanged
-clusterrolebinding.rbac.authorization.k8s.io/tekton-kyst unchanged
-task.tekton.dev/wrap4kyst configured
+task.tekton.dev/apply created
+task.tekton.dev/git-clone created
+pipeline.tekton.dev/ensure-latest-kyst-custom-resources created
+serviceaccount/tekton-kyst created
+clusterrole.rbac.authorization.k8s.io/tekton-kyst created
+clusterrolebinding.rbac.authorization.k8s.io/tekton-kyst created
+task.tekton.dev/wrap4kyst created
 pipelinerun.tekton.dev/ensure-latest-kyst-custom-resources-run created
 [fetch-repo : clone] + '[' false '=' true ]
 [fetch-repo : clone] + '[' false '=' true ]
@@ -48,14 +48,14 @@ pipelinerun.tekton.dev/ensure-latest-kyst-custom-resources-run created
 [fetch-repo : clone] + test -z 
 [fetch-repo : clone] + test -z 
 [fetch-repo : clone] + /ko-app/git-init '-url=https://github.com/edge-experiments/gitops-source.git' '-revision=main' '-refspec=' '-path=/workspace/output/' '-sslVerify=true' '-submodules=true' '-depth=1' '-sparseCheckoutDirectories='
-[fetch-repo : clone] {"level":"info","ts":1682994560.014205,"caller":"git/git.go:170","msg":"Successfully cloned https://github.com/edge-experiments/gitops-source.git @ 4598b3d30b848d05c27526a95109a6925c7dbdb5 (grafted, HEAD, origin/main) in path /workspace/output/"}
-[fetch-repo : clone] {"level":"info","ts":1682994560.0300348,"caller":"git/git.go:208","msg":"Successfully initialized and updated submodules in path /workspace/output/"}
+[fetch-repo : clone] {"level":"info","ts":1683299827.9633677,"caller":"git/git.go:170","msg":"Successfully cloned https://github.com/edge-experiments/gitops-source.git @ beb35d986c597ad32358539dfa69e1cf7be962da (grafted, HEAD, origin/main) in path /workspace/output/"}
+[fetch-repo : clone] {"level":"info","ts":1683299827.9792137,"caller":"git/git.go:208","msg":"Successfully initialized and updated submodules in path /workspace/output/"}
 [fetch-repo : clone] + cd /workspace/output/
 [fetch-repo : clone] + git rev-parse HEAD
-[fetch-repo : clone] + RESULT_SHA=4598b3d30b848d05c27526a95109a6925c7dbdb5
+[fetch-repo : clone] + RESULT_SHA=beb35d986c597ad32358539dfa69e1cf7be962da
 [fetch-repo : clone] + EXIT_CODE=0
 [fetch-repo : clone] + '[' 0 '!=' 0 ]
-[fetch-repo : clone] + printf '%s' 4598b3d30b848d05c27526a95109a6925c7dbdb5
+[fetch-repo : clone] + printf '%s' beb35d986c597ad32358539dfa69e1cf7be962da
 [fetch-repo : clone] + printf '%s' https://github.com/edge-experiments/gitops-source.git
 
 [wrap-for-kyst : ls] content of the repository:
@@ -64,11 +64,12 @@ pipelinerun.tekton.dev/ensure-latest-kyst-custom-resources-run created
 [wrap-for-kyst : ls] flux
 [wrap-for-kyst : ls] kcp
 [wrap-for-kyst : ls] kubernetes
+[wrap-for-kyst : ls] tekton
 [wrap-for-kyst : ls] turbonomic
 
-[wrap-for-kyst : wrap] 2023/05/02 02:29:24 target: k8s
-[wrap-for-kyst : wrap] 2023/05/02 02:29:24 Found file: guestbook-ui-deployment.yaml, adding to raw content
-[wrap-for-kyst : wrap] 2023/05/02 02:29:24 Found file: guestbook-ui-svc.yaml, adding to raw content
+[wrap-for-kyst : wrap] 2023/05/05 15:17:12 target: k8s
+[wrap-for-kyst : wrap] 2023/05/05 15:17:12 Found file: guestbook-ui-deployment.yaml, adding to raw content
+[wrap-for-kyst : wrap] 2023/05/05 15:17:12 Found file: guestbook-ui-svc.yaml, adding to raw content
 
 [show-configspec : cat] apiVersion: edge.kyst.kube/v1alpha1
 [show-configspec : cat] kind: ConfigSpec
@@ -120,22 +121,16 @@ pipelinerun.tekton.dev/ensure-latest-kyst-custom-resources-run created
 [apply-manifests : kubectl-version] Kustomize Version: v5.0.1
 
 [apply-manifests : kubectl-apply] before applying:
-[apply-manifests : kubectl-apply] NAMESPACE   NAME                                          AGE
-[apply-manifests : kubectl-apply] default     configspec.edge.kyst.kube/configspec-sample   206d
-[apply-manifests : kubectl-apply] 
-[apply-manifests : kubectl-apply] NAMESPACE   NAME                                            AGE
-[apply-manifests : kubectl-apply] default     devicegroup.edge.kyst.kube/devicegroup-sample   206d
+[apply-manifests : kubectl-apply] No resources found
 [apply-manifests : kubectl-apply] applying:
 [apply-manifests : kubectl-apply] configspec.edge.kyst.kube/guestbook created
 [apply-manifests : kubectl-apply] devicegroup.edge.kyst.kube/guestbook1 created
 [apply-manifests : kubectl-apply] after applying:
-[apply-manifests : kubectl-apply] NAMESPACE   NAME                                          AGE
-[apply-manifests : kubectl-apply] default     configspec.edge.kyst.kube/configspec-sample   206d
-[apply-manifests : kubectl-apply] default     configspec.edge.kyst.kube/guestbook           0s
+[apply-manifests : kubectl-apply] NAMESPACE   NAME                                  AGE
+[apply-manifests : kubectl-apply] default     configspec.edge.kyst.kube/guestbook   0s
 [apply-manifests : kubectl-apply] 
-[apply-manifests : kubectl-apply] NAMESPACE   NAME                                            AGE
-[apply-manifests : kubectl-apply] default     devicegroup.edge.kyst.kube/devicegroup-sample   206d
-[apply-manifests : kubectl-apply] default     devicegroup.edge.kyst.kube/guestbook1           0s
+[apply-manifests : kubectl-apply] NAMESPACE   NAME                                    AGE
+[apply-manifests : kubectl-apply] default     devicegroup.edge.kyst.kube/guestbook1   0s
 ```
 
 Remove the kyst custom resources:
@@ -187,7 +182,7 @@ Install the definitions of the trigger.
 kubectl apply -f tekton/triggers/definitions/triggers.yaml
 ```
 
-Ensure the tasks for creating the ingress and the GitHub webhook.
+Create the tasks for creating the ingress and the GitHub webhook.
 ```shell
 kubectl apply -f tekton/triggers/definitions/create-ingress.yaml
 kubectl apply -f tekton/triggers/definitions/create-webhook.yaml
