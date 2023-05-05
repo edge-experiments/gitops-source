@@ -7,8 +7,8 @@ But we don't need to worry about this during the experiments.
 
 All we need to know about kyst are three things:
 1. As the name suggests, `wrap4kyst` is a wrapper that translates Kubernetes native APIs into kyst custom resources;
-3. Specifically, the two kinds of kyst custom resources used here are `ConfigSpec` and `DeviceGroup`;
-2. The custom resouce Definitions for `ConfigSpec` and `DeviceGroup` are made available [locally in this repository](./crds/).
+2. Specifically, the two kinds of kyst custom resources used here are `ConfigSpec` and `DeviceGroup`;
+3. The custom resource definitions for `ConfigSpec` and `DeviceGroup` are made available [locally in this repository](./crds/).
 
 All we need to do about kyst is installing the CRDs for `ConfigSpec` and `DeviceGroup`.
 ```shell
