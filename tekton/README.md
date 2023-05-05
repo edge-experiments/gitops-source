@@ -1,6 +1,20 @@
 Here is an example of Tekton triggers and Tekton pipelines.
 In this example, pushing to GitHub triggers a PipelineRun, which in turn ensures some custom resources are up current.
 
+### Some notes about the custom resources
+'kyst' is the name of a project that not publicly visible.
+But we don't need to worry about this during the experiments.
+
+All we need to know about kyst are three things:
+1. As the name suggests, `wrap4kyst` is a wrapper that translates Kubernetes native APIs into kyst custom resources;
+3. Specifically, the two kinds of kyst custom resources used here are `ConfigSpec` and `DeviceGroup`;
+2. The custom resouce Definitions for `ConfigSpec` and `DeviceGroup` are made available [locally in this repository](./crds/).
+
+All we need to do about kyst is installing the CRDs for `ConfigSpec` and `DeviceGroup`.
+```shell
+kubectl apply -f tekton/crds/
+```
+
 ### Manually run the pipeline
 The pipeline can be ran without the trigger.
 
@@ -226,7 +240,7 @@ Remove definitions, as well as the RBAC, of the pipeline.
 kubectl delete -f tekton/pipelines/definitions
 ```
 
-Remove th ingress.
+Remove the ingress.
 ```shell
 kubectl delete ingress el-getting-started-listener
 ```
@@ -252,4 +266,9 @@ kubectl delete -f tekton/triggers/definitions
 Remove the RBAC of the trigger.
 ```shell
 kubectl delete -f tekton/triggers/definitions/rbac
+```
+
+Remove the CRDs for `ConfigSpec` and `DeviceGroup`.
+```shell
+kubectl delete -f tekton/crds/
 ```
