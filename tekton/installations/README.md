@@ -5,6 +5,7 @@ I just removed it from the yaml.
 Similarly the `HorizontalPodAutoscaler` is removed from the yaml (see comments there).
 
 With this modified installation, it seems OK with the [Getting Started](https://tekton.dev/docs/getting-started/) tutorial.
+[Here](./pipelines.yaml) is a saved copy of the installation.
 
 I do have options with previous k8s versions by using k3s or Kind. But after thinking twice let me try to continue with my regular k8s first. After all, I want to run Tekton together with kyst, and I don't know: Whether kyst's large footprint can fit into k3s or Kind?
 
