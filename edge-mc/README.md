@@ -20,7 +20,7 @@ INFO[0001] ClusterRoleBinding "argocd-manager-role-binding" updated
 Cluster 'https://172.31.31.125:6443/clusters/root:my-org:wmw-turbo' added
 ```
 
-#### Create Argo CD Applications against edge-mc's IWM
+#### Create Argo CD Applications against edge-mc's IMW
 Create two Locations. The command and output should be similar to
 ```console
 $ argocd app create locations \
