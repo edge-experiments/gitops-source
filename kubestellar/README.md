@@ -1,12 +1,12 @@
-#### Add edge-mc's workspaces to Argo CD as clusters
-This includes the edge-mc Inventory Management Workspace (IMW) and Workload Management Workspace (WMW).
+#### Add KubeStellar's workspaces to Argo CD as clusters
+This includes the KubeStellar's Inventory Management Workspace (IMW) and Workload Management Workspace (WMW).
 The procedure for the two workspaces are similar.
 Let's take WMW as example:
 
 First, create `kube-system` namespace in the workspace.
 
 Second, make sure necessary apibindings exist in the workspace.
-For WMW, we need one for Kubernetes and one for edge-mc's edge API.
+For WMW, we need one for Kubernetes and one for KubeStellar's edge API.
 
 Third, make sure the current context uses WMW, then identify the admin.kubeconfig.
 
@@ -20,12 +20,12 @@ INFO[0001] ClusterRoleBinding "argocd-manager-role-binding" updated
 Cluster 'https://172.31.31.125:6443/clusters/root:my-org:wmw-turbo' added
 ```
 
-#### Create Argo CD Applications against edge-mc's IMW
+#### Create Argo CD Applications against KubeStellar's IMW
 Create two Locations. The command and output should be similar to
 ```console
 $ argocd app create locations \
 --repo https://github.com/edge-experiments/gitops-source.git \
---path edge-mc/locations/ \
+--path kubestellar/locations/ \
 --dest-server https://172.31.31.125:6443/clusters/root:imw-turbo \
 --sync-policy automated
 application 'locations' created
@@ -35,18 +35,18 @@ Create two SyncTargets. The command and output should be similar to
 ```console
 $ argocd app create synctargets \
 --repo https://github.com/edge-experiments/gitops-source.git \
---path edge-mc/synctargets/ \
+--path kubestellar/synctargets/ \
 --dest-server https://172.31.31.125:6443/clusters/root:imw-turbo \
 --sync-policy automated
 application 'synctargets' created
 ```
 
-#### Create Argo CD Application against edge-mc's WMW
+#### Create Argo CD Application against KubeStellar's WMW
 Create a Namespace. The command and output should be similar to
 ```console
 $ argocd app create namespace \
 --repo https://github.com/edge-experiments/gitops-source.git \
---path edge-mc/namespaces/ \
+--path kubestellar/namespaces/ \
 --dest-server https://172.31.31.125:6443/clusters/root:my-org:wmw-turbo \
 --sync-policy automated
 application 'namespace' created
@@ -56,7 +56,7 @@ Create a Deployment for 'cpumemload'. The command and output should be similar t
 ```console
 $ argocd app create cpumemload \
 --repo https://github.com/edge-experiments/gitops-source.git \
---path edge-mc/workloads/cpumemload/ \
+--path kubestellar/workloads/cpumemload/ \
 --dest-server https://172.31.31.125:6443/clusters/root:my-org:wmw-turbo \
 --sync-policy automated
 application 'cpumemload' created
@@ -66,7 +66,7 @@ Create an EdgePlacement. The command and output should be similar to
 ```console
 $ argocd app create edgeplacement \
 --repo https://github.com/edge-experiments/gitops-source.git \
---path edge-mc/placements/ \
+--path kubestellar/placements/ \
 --dest-server https://172.31.31.125:6443/clusters/root:my-org:wmw-turbo \
 --sync-policy automated
 application 'edgeplacement' created
