@@ -60,10 +60,10 @@ pipelinerun.tekton.dev/ensure-latest-kyst-custom-resources-run created
 
 [wrap-for-kyst : ls] content of the repository:
 [wrap-for-kyst : ls] README.md
-[wrap-for-kyst : ls] kubestellar
 [wrap-for-kyst : ls] flux
 [wrap-for-kyst : ls] kcp
 [wrap-for-kyst : ls] kubernetes
+[wrap-for-kyst : ls] kubestellar
 [wrap-for-kyst : ls] tekton
 [wrap-for-kyst : ls] turbonomic
 
